@@ -4,33 +4,18 @@ import type { AssetInitOptions } from '@pixi/assets';
 export async function loadAssets() {
   const initOptions: AssetInitOptions = {
     basePath: './assets',
-    texturePreference: {
-      resolution: [1],
-      format: ['avif', 'webp', 'png', 'jpg', 'jpeg'],
-    },
-    manifest: {
-      bundles: [
-        {
-          name: 'load-screen',
-          assets: [
-            {
-              name: 'eye',
-              srcs: 'eye.{svg,webp}',
-            },
-          ],
-        },
-        {
-          name: 'game-screen',
-          assets: [],
-        },
-      ],
-    },
+    manifest: "./manifest.json",
   };
 
   await Assets.init(initOptions);
 
   const loadScreenAssets = await Assets.loadBundle('load-screen');
   const gameScreenAssets = await Assets.loadBundle('game-screen');
+
+  console.log({
+    loadScreenAssets,
+    gameScreenAssets,
+  })
 
   return Assets.cache as any;
 }
