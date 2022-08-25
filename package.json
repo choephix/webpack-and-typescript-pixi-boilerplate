@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "build": "webpack",
-    "start": "webpack && serve dist",
-    "dev": "webpack serve"
+    "build-and-serve": "webpack && serve dist",
+    "start": "webpack serve"
   },
   "keywords": [],
   "author": "",

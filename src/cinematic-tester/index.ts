@@ -8,7 +8,7 @@ console.log(`Hey there`);
 const context = createContext();
 
 loadAssets().then(() => {
-  const TEXTURE_URL = './eye.svg';
+  const TEXTURE_URL = 'eye';
   const pikachu = new Sprite(Texture.from(TEXTURE_URL));
   context.app.stage.addChild(pikachu);
 });

@@ -2,7 +2,7 @@
   "bundles": [
     {
       "name": "load-screen",
-      "assets": [{ "name": "eye", "srcs": "eye.{svg}" }]
+      "assets": [{ "name": "eye", "srcs": "./eye.{svg}" }]
     },
     { "name": "game-screen", "assets": [] }
   ]
