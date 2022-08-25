@@ -1,33 +1,36 @@
-import { Loader, LoaderResource } from "@pixi/loaders";
+import { Assets } from '@pixi/assets';
+import type { AssetInitOptions } from '@pixi/assets';
 
-const assetsNamed = {
-  eye: "./eye.svg"
-}
+export async function loadAssets() {
+  const initOptions: AssetInitOptions = {
+    basePath: './assets',
+    texturePreference: {
+      resolution: [1],
+      format: ['avif', 'webp', 'png', 'jpg', 'jpeg'],
+    },
+    manifest: {
+      bundles: [
+        {
+          name: 'load-screen',
+          assets: [
+            {
+              name: 'eye',
+              srcs: 'eye.{svg,webp}',
+            },
+          ],
+        },
+        {
+          name: 'game-screen',
+          assets: [],
+        },
+      ],
+    },
+  };
 
-const assetsUnnamed = [
-]
+  await Assets.init(initOptions);
 
-export function loadAssets() {
-  const loader = new Loader();
+  const loadScreenAssets = await Assets.loadBundle('load-screen');
+  const gameScreenAssets = await Assets.loadBundle('game-screen');
 
-  for (const key in assetsNamed) {
-    const path = assetsNamed[key];
-    loader.add(key, path);
-  }
-
-  for (const path of assetsUnnamed) {
-    loader.add(path);
-  }
-
-  const promise = new Promise<Record<string, LoaderResource>>(
-    (resolve) => {
-      loader.load(
-        (loader, resource) => {
-          resolve(resource);
-        }
-      )
-    }
-  )
-
-  return promise;
+  return Assets.cache as any;
 }
